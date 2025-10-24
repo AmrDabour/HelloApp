@@ -18,12 +18,12 @@ enable_dns_hostnames = true
 enable_dns_support   = true
 
 # EKS Configuration
-cluster_version           = "1.28"
-node_group_desired_size   = 6 # 2 nodes per AZ for HA
-node_group_min_size       = 3
-node_group_max_size       = 12
-node_instance_types       = ["t3.medium"]
-node_disk_size            = 20
+cluster_version           = "1.30"
+node_group_desired_size   = 1 # 2 nodes per AZ for HA
+node_group_min_size       = 1
+node_group_max_size       = 2
+node_instance_types       = ["t2.micro"]
+node_disk_size            = 10
 enable_cluster_encryption = true
 
 # Control plane logging

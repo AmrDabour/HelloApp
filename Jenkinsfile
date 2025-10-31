@@ -2,8 +2,9 @@ pipeline {
     agent any
     
     environment {
-        AWS_REGION = 'eu-west-1'  
+        AWS_REGION = 'us-east-1'
         TF_VERSION = '1.5.0'
+        AWS_CREDENTIALS_ID = 'aws-credentials'  // Change this to your Jenkins credentials ID
     }
     
     stages {
@@ -15,8 +16,10 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-                script {
-                    sh 'terraform init'
+                withCredentials([aws(credentialsId: "${AWS_CREDENTIALS_ID}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    script {
+                        sh 'terraform init'
+                    }
                 }
             }
         }
@@ -31,8 +34,10 @@ pipeline {
         
         stage('Terraform Plan') {
             steps {
-                script {
-                    sh 'terraform plan -out=tfplan'
+                withCredentials([aws(credentialsId: "${AWS_CREDENTIALS_ID}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    script {
+                        sh 'terraform plan -out=tfplan'
+                    }
                 }
             }
         }
@@ -51,8 +56,10 @@ pipeline {
         //         branch 'main'
         //     }
         //     steps {
-        //         script {
-        //             sh 'terraform apply -auto-approve tfplan'
+        //         withCredentials([aws(credentialsId: "${AWS_CREDENTIALS_ID}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+        //             script {
+        //                 sh 'terraform apply -auto-approve tfplan'
+        //             }
         //         }
         //     }
         // }

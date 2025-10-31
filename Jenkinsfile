@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        AWS_REGION = 'eu-west-1'  // Change to your region
+        AWS_REGION = 'eu-west-1'  
         TF_VERSION = '1.5.0'
     }
     

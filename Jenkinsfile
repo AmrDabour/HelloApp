@@ -46,16 +46,16 @@ pipeline {
             }
         }
         
-        stage('Terraform Apply') {
-            when {
-                branch 'main'
-            }
-            steps {
-                script {
-                    sh 'terraform apply -auto-approve tfplan'
-                }
-            }
-        }
+        // stage('Terraform Apply') {
+        //     when {
+        //         branch 'main'
+        //     }
+        //     steps {
+        //         script {
+        //             sh 'terraform apply -auto-approve tfplan'
+        //         }
+        //     }
+        // }
     }
     
     post {
